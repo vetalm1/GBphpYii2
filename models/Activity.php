@@ -19,13 +19,13 @@ class Activity extends Model
 
     // чтобы появилась валидация нужно переопределить функцию  rules
 
-    public function rules()// это мы их типа переопределяем, но видимо гдето run запускается
+    public function rules()// это мы их типа переопределяем
     {
         return [
           ['title', 'required'],
-          [['description', 'color'], 'string', 'max' => 250],
-          ['date', 'string'],
-          [['isBlocked', 'isRepeat', 'priority'], 'boolean']
+            [['description', 'color'], 'string', 'max' => 250],
+            ['date', 'string'],
+            [['isBlocked', 'isRepeat', 'priority'], 'boolean']
         ];
     }
 

@@ -66,6 +66,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+        <p><a href="<?= isset($this->params['lastPage']) ? $this->params['lastPage'] : '';?>">Предыдущая страница: <?= isset($this->params['lastPage']) ? $this->params['lastPage'] : '';?></a></p>
         <?= $content ?>
     </div>
 </div>

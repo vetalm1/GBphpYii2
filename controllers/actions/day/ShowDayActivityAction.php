@@ -22,7 +22,6 @@ class ShowDayActivityAction extends Action
             }
         }
 
-
         return $this->controller->render('showDay', ['dayTitle'=>$this->dayTitle, 'model'=>$model]);
     }
 }

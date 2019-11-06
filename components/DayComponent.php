@@ -2,7 +2,7 @@
 
 namespace app\components;
 
-use app\models\day;
+use app\models\Day;
 use yii\base\Component;
 
 class DayComponent extends Component
@@ -14,7 +14,7 @@ class DayComponent extends Component
         return new $this->modelClass;
     }
 
-    public function showActivity(day $day): array
+    public function showActivity(Day $day): array
     {
         if($day->validate()){
             $this->storageOfActivity = $this->findActivity($day->date);

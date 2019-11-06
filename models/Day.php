@@ -6,13 +6,13 @@ namespace app\models;
 
 use yii\base\Model;
 
-class day extends Model
+class Day extends Model
 {
 
     public $date;
     public $workday;
 
-    public function rules()// это мы их типа переопределяем, но видимо гдето run запускается
+    public function rules()// это мы их типа переопределяем
     {
         return [
             ['date', 'string'],

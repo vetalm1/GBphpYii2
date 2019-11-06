@@ -14,10 +14,10 @@ class CreateAction extends Action
     {
 
         //$model = new Activity();  //-без Юи было так
-        // в Yii нужно так создавать экземпляр, а не как сверху.
+        // в фреймворке нужно так создавать экземпляр, а не как сверху.
         $model = \Yii::$app->activity->getModel();
 
-        if (\Yii::$app->request->isPost){  // проверка существует ли пост запрос, забыть про $_POST в Yii :))
+        if (\Yii::$app->request->isPost){  // проверка существует ли пост запрос, забыть про $_POST в фреймворках :))
             $model->load(\Yii::$app->request->post()); // наполнение модели, атрибут который в правилах не объявлен, через функцию load не наполняется
             if(\Yii::$app->activity->addActivity($model)){
                    $this->name=$model->title; //'Успешно выполнено ';

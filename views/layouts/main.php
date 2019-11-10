@@ -38,9 +38,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'HW1', 'url' => ['/teacher/student']],
-            ['label' => 'HW2', 'url' => ['/activity/create']],
-            ['label' => 'HW2(2)', 'url' => ['/day/showDayActivity']],
+           // ['label' => 'HW1', 'url' => ['/teacher/student']],
+            ['label' => 'Создать активность', 'url' => ['/activity/create']],
+            ['label' => 'Активности на день', 'url' => ['/day/showDayActivity']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

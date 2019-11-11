@@ -17,6 +17,8 @@
     <li>Уведомлять: <?=$model->useNotification ? 'Да':'Нет'?></li>
     <li>Адрес эл. почты для уведомления: <br> <?=$model->email?></li>
     <li>
-        <img width="300" src="/files/<?=$model->file?>" alt="">
+        <?php foreach ($model->files as $img) : ?>
+            <img width="300" src="/files/<?=$img?>" alt="">
+        <?php endforeach ?>
     </li>
 </ul>

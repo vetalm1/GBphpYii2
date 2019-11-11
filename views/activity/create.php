@@ -22,7 +22,8 @@
             <?=$form->field($model, 'email', ['enableClientValidation'=>false,'enableAjaxValidation'=>true]);?> <!--// параметр  отсылает запрос серверу на валидацию,-->
             <?=$form->field($model, 'repeatEmail', ['enableClientValidation'=>false,'enableAjaxValidation'=>true]);?> <!--//на стороне клиента врубить аякс валидацию и вырубить клиентскую-->
                                                                                          <!--можно все это прописать внутри ActiveForm::begin(), тогда для всех элементов формы будет так работать-->
-            <?=$form->field($model, 'file')->fileInput()?> <!--//для загрузки файла  экземпляр создается в ActivityComponent-->
+            <?=$form->field($model, 'files[]')->fileInput(['multiple' => true])?>
+        <!--<?//=$form->field($model, 'file')->fileInput()?> вариант для одного файла --> <!--//для загрузки файла,  экземпляр создается в ActivityComponent-->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>

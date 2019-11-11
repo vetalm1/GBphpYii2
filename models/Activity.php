@@ -27,7 +27,7 @@ class Activity extends Model
     public $email;
     public $useNotification;
 
-    Public $file;
+    Public $files;
 
     public function  beforeValidate()
     {
@@ -45,7 +45,7 @@ class Activity extends Model
     {
         return [
             ['title', 'required'],
-            ['file', 'file', 'extensions' => ['jpg', 'png', 'gif']],
+            [['files'], 'file', 'extensions' => ['jpg', 'png', 'gif'], 'maxFiles' => 10],
             [['description'], 'string', 'max' => 250, 'min'=>5],
             ['date', 'string'],
             ['date', 'date', 'format' => 'php:Y-m-d'], //формат даты

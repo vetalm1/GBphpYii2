@@ -10,19 +10,18 @@
 <div class="row">
     <div class="col-md-8">
         <?php $form = \yii\bootstrap\ActiveForm::begin();?>  <?//это такой способ создания формы?>
-            <?=$form->field($model, 'title')->input('text', ['value' => 'hidden value']);?>
-            <?=$form->field($model, 'description')->textarea(['value' => 'hidden value']);?>
-            <?=$form->field($model, 'date');?> <?// можно добавить формат //input('date')?>
-            <?=$form->field($model, 'priority')->checkbox(['checked' => true]);?>
-            <?=$form->field($model, 'isBlocked')->checkbox();?>
-            <?=$form->field($model, 'isRepeat')->checkbox();?>
+            <?=$form->field($model, 'title')->input('text', ['value' => 'value from BD']);?>
+            <?=$form->field($model, 'description')->textarea(['value' => 'value from BD']);?>
+            <?=$form->field($model, 'date');?>
+            <?=$form->field($model, 'priority')->checkbox(['checked' => true]);?> <!--value from BD-->
+            <?=$form->field($model, 'isBlocked')->checkbox(['checked' => true]);?> <!--value from BD-->
+            <?=$form->field($model, 'isRepeat')->checkbox(['checked' => true]);?> <!--value from BD-->
             <?=$form->field($model, 'repeatType')->dropDownList($model::REPEAT_TYPE);?>
 
-            <?=$form->field($model, 'useNotification')->checkbox();?>
-            <?=$form->field($model, 'email', ['enableClientValidation'=>false,'enableAjaxValidation'=>true]);?>
-            <?=$form->field($model, 'repeatEmail', ['enableClientValidation'=>false,'enableAjaxValidation'=>true]);?>
+            <?=$form->field($model, 'useNotification')->checkbox(['checked' => true]);?> <!--value from BD-->
+            <?=$form->field($model, 'email', ['enableClientValidation'=>false,'enableAjaxValidation'=>true])->input('text', ['value' => 'value from BD']);?>
+            <?=$form->field($model, 'repeatEmail', ['enableClientValidation'=>false,'enableAjaxValidation'=>true])->input('text', ['value' => 'value from BD']);?>
 
-<!--            --><?//=$form->field($model, 'file')->fileInput()?><!-- -->
             <div class="form-group">
                 <button type="submit" class="btn btn-primary">Сохранить</button>
             </div>

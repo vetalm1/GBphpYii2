@@ -12,14 +12,14 @@ class Day extends Model
     public $date;
     public $workday;
 
-    public function rules()// это мы их типа переопределяем
+    public function rules()
     {
         return [
             ['date', 'string'],
         ];
     }
 
-    public function attributeLabels() // переобзываем лейбл на русский язык
+    public function attributeLabels()
     {
         return [
             'date' => 'Дата',

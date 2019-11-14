@@ -42,7 +42,7 @@ class ActivityComponent extends Component
 //                return $name;
 //            }
 //     }  return null;
-    private function saveFile($file) {  //тут как-то не по феншую получилось, сверить с разбором дз
+    private function saveFile($file): ?string {
         $names=[];
         foreach ($file as  $fileItem) {
             $name = 'files/' . $this->genFileName($fileItem);  // почему-то с @webroot не заработало

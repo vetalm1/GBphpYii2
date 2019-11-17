@@ -18,7 +18,7 @@ class m191114_112025_createTables extends Migration
             'description'=>$this->text(),
             'dateStart'=>$this->dateTime()->notNull(),
             'isBlocked'=>$this->boolean()->notNull()->defaultValue(0),
-            'createAT'=>$this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),  //дада создания
+            'createAT'=>$this->timestamp()->notNull()->defaultExpression('CURRENT_TIMESTAMP'),  //дата создания
             'email'=>$this->string(150)
         ]);
 

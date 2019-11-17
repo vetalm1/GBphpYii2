@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Приложение Ежедневник', //Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -40,7 +40,7 @@ AppAsset::register($this);
         'items' => [
            // ['label' => 'HW1', 'url' => ['/teacher/student']],
             ['label' => 'Создать активность', 'url' => ['/activity/create']],
-            ['label' => 'Активности на день', 'url' => ['/day/showDayActivity']],
+            ['label' => 'Просмотр Активностей', 'url' => ['/day/showDayActivity']],
             ['label' => 'Home', 'url' => ['/site/index']],
             ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],

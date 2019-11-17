@@ -5,10 +5,11 @@ namespace app\controllers\actions\day;
 
 
 use yii\base\Action;
-use app\components\DayComponent;
-use app\components\DAOComponent;
-class ShowDayActivityAction extends Action
+use yii\web\Controller;
+
+class showDataActivityAction extends Action
 {
+    public $param;
     public $dayTitle;
     public $calendar;
     private $dao;
@@ -19,21 +20,23 @@ class ShowDayActivityAction extends Action
     {
         $this->dao = \Yii::$app->dao;
         $this->activity = $this->dao->getAnyActivity(3, date('Y-m-d'));
-        $this->ActivityCurrentDay = $this->dao->getActivityCurrentDay(date('Y-m-d'));
-
-        $model = \Yii::$app->day->getModel();
+       // $this->param = \Yii::$app->request->queryString;
+        $this->ActivityCurrentDay = $this->dao->getActivityCurrentDay($this->param);//date('Y-m-d', $this->param));
 
         // вывод календаря
         $month = date('n', time());
         $year = date('Y', time());
         $this->calendar = \Yii::$app->day->showCalendar($month , $year);
 
-        if (\Yii::$app->request->isPost){
-            $model->load(\Yii::$app->request->post());
-            if(\Yii::$app->day->showActivity($model) !==[false]){
-                $this->dayTitle='Список активностей на дату '.\Yii::$app->day->showActivity($model)['активность1'];
-            }
-        }
+        $model = \Yii::$app->day->getModel();
+
+
+//        if (\Yii::$app->request->isPost){
+//            $model->load(\Yii::$app->request->post());
+//            if(\Yii::$app->day->showActivity($model) !==[false]){
+//                $this->dayTitle='Список активностей на дату '.\Yii::$app->day->showActivity($model)['активность1'];
+//            }
+//        }
 
         return $this->controller->render('showDay',
             [
@@ -44,4 +47,6 @@ class ShowDayActivityAction extends Action
                 'ActivityCurrentDay'=>$this->ActivityCurrentDay
             ]);
     }
+
+
 }

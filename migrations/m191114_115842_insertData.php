@@ -26,11 +26,14 @@ class m191114_115842_insertData extends Migration
         $this->batchInsert('activity', [
             'title','dateStart','isBlocked','userId'
         ],[
-            ['title1', date('Y-m-d'),0,1],
-            ['title2', date('Y-m-d'),1,1],
-            ['title3', date('Y-m-d'),1,1],
-            ['title4', date('Y-m-d'),0,2],
-            ['title5', '2019-11-10',0,2]
+            ['Kill Bill', date('Y-m-d'),0,1],
+            ['Find Nemo', date('Y-m-d'),1,1],
+            ['Eating tablets', '2019-10-11',1,1],
+            ['Dont Forgot to sleep', '2019-10-12',0,2],
+            ['By presents', '2019-12-12',0,2],
+            ['By Christmas Tree', '2019-12-13',0,2],
+            ['Play game', '2019-12-20',0,2],
+            ['Prepare Olivier', '2019-12-31',0,2]
 
         ]);
     }
@@ -41,8 +44,8 @@ class m191114_115842_insertData extends Migration
     public function safeDown()
     {
 
+        $this->delete('activity');
         $this->delete('users');
-
 
     }
 

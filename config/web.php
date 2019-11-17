@@ -16,7 +16,8 @@ $config = [
     ],
     'components' => [
         'activity'=>['class'=>\app\components\ActivityComponent::class , 'modelClass' => \app\models\Activity::class], // настроили новый компонент, теперь можем к нему обращаться
-             'day'=>['class'=>\app\components\DayComponent::class , 'modelClass' => \app\models\Day::class],
+        'day'=>['class'=>\app\components\DayComponent::class , 'modelClass' => \app\models\Day::class],
+        'dao'=>['class'=>\app\components\DAOComponent::class],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'usy5eFf1iDA_yMSSqzAidAO4mGzEr1tc',

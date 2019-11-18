@@ -18,15 +18,16 @@ class DayComponent extends Component
     public function showActivity(Day $day): array
     {
         if($day->validate()){
-            $this->storageOfActivity = $this->findActivity($day->date);
-            return $this->storageOfActivity;
+//            $this->storageOfActivity = $this->findActivity($day->date);
+//            return $this->storageOfActivity;
+            return ['date'=>$day->date];
         }
         return [false];
     }
 
-    public function findActivity($date){
-        return ['активность1'=>$date];
-    }
+//    public function findActivity($date){
+//        return ['активность1'=>$date];
+//    }
     public function showCalendar($month , $year){
 //        $month = 12;
 //        $year = 2019;

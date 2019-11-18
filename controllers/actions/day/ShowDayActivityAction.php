@@ -31,7 +31,13 @@ class ShowDayActivityAction extends Action
         if (\Yii::$app->request->isPost){
             $model->load(\Yii::$app->request->post());
             if(\Yii::$app->day->showActivity($model) !==[false]){
-                $this->dayTitle='Список активностей на дату '.\Yii::$app->day->showActivity($model)['активность1'];
+                $this->activity =[];
+                $this->dayTitle='Список активностей на дату '.\Yii::$app->day->showActivity($model)['date'];
+                $this->activity = $this->dao->getActivityOnDate(3, \Yii::$app->day->showActivity($model)['date']);
+                return $this->controller->render('showActivityOnDate', [
+                    'dayTitle'=>$this->dayTitle,
+                    'activity'=>$this->activity
+                ]);
             }
         }
 

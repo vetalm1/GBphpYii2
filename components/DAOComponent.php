@@ -20,6 +20,15 @@ class DAOComponent extends Component
         return $record;
     }
 
+    public function getActivityOnDate($num, $date){
+        $query=new Query();
+        $record=$query->from('activity')
+            ->limit($num)
+            ->andWhere('dateStart=:date', [':date' => $date])
+            ->createCommand()->query();
+        return $record;
+    }
+
     public function getActivityCurrentDay($date){
         $query=new Query();
         $record=$query->from('activity')
@@ -30,7 +39,11 @@ class DAOComponent extends Component
 
     }
 
-
+    public function saveToDb($title, $dateStart, $isBlocked, $userId){
+        $this->getConnection()->createCommand()
+            ->insert('activity',['title'=>$title, 'dateStart'=>$dateStart, 'isBlocked'=>$isBlocked, 'userId'=>$userId,])
+            ->execute();
+    }
 
     public function getUsersList(): ?array
     {

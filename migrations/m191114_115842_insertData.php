@@ -30,8 +30,8 @@ class m191114_115842_insertData extends Migration
             ['Find Nemo', date('Y-m-d'),1,1],
             ['Eating tablets', '2019-10-11',1,1],
             ['Dont Forgot to sleep', '2019-10-12',0,2],
-            ['By presents', '2019-12-12',0,2],
-            ['By Christmas Tree', '2019-12-13',0,2],
+            ['Buy presents', '2019-12-12',0,2],
+            ['Buy Christmas Tree', '2019-12-13',0,2],
             ['Play game', '2019-12-20',0,2],
             ['Prepare Olivier', '2019-12-31',0,2]
 

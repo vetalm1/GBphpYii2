@@ -12,12 +12,16 @@ use yii\web\Response;
 class CreateAction extends Action
 {
     public $name;
+    private $dao;
+
     public  function run()
     {
 
         //$model = new Activity();  //-без Юи было так
         // в фреймворке нужно так создавать экземпляр, а не как сверху.
         $model = \Yii::$app->activity->getModel();
+        $this->dao = \Yii::$app->dao;
+
 
         if (\Yii::$app->request->isPost){  // проверка существует ли пост запрос, забыть про $_POST в фреймворках :))
             $model->load(\Yii::$app->request->post()); // наполнение модели, атрибут который в правилах не объявлен, через функцию load не наполняется
@@ -31,6 +35,7 @@ class CreateAction extends Action
                    //$this->name=$model->title;
                 print_r($model->getErrors());
             } else {
+                $this->dao->saveToDb($model->title, $model->date, $model->isBlocked, 1);
                 return $this->controller->render('view', ['model'=>$model]); // временно закинем в просмотр
             }
         }

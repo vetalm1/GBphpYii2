@@ -21,13 +21,21 @@ class ActivityComponent extends Component
         $activity->files=UploadedFile::getInstances($activity,'files'); //создаст экземпляр класса UploadedFile со всеми настройками файла который загружен /
                                                 // буквочку s не забыть приписать чтобы несколько
 
+        $activity->userId=\Yii::$app->user->getIdentity()->id;  // userid присваиваем id текущего аутентифицированного пользователя
 
-        if($activity->validate()){
-            if($activity->files ){ // если активити есть но чтото с сохранением файла то фалс
+        if($activity->validate()){ //когда файлы будем сохранять эта конструкция не сработает нужно ее както обыграть через json
+            if($activity->files){ // если активити есть но чтото с сохранением файла то фалс
                 $activity->files = $this->saveFile($activity->files);
                 if(!$activity->files) {
                     return false;
                 }
+            }
+//            else {
+//                $activity->files=null;
+//            }
+
+            if($activity->save(false)){ // сохранение в базе в таблице activity
+                return true;
             }
             return true;
         }

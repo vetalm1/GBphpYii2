@@ -9,7 +9,7 @@
 <h1 class="text-primary"><?=$model->title?></h1>
 <ul >
     <li class="text-success">Описание: <br> <?=$model->description?></li>
-    <li>Дата: <?=$model->date?></li>
+    <li>Дата: <?=$model->dateStart?></li>
     <li>Блокирующее событие: <?=$model->isBlocked ? 'Да':'Нет'?></li>
     <li>Приоритеное: <?=$model->priority ? 'Да':'Нет'?></li>
     <li>Повторяется: <?=$model->isRepeat ? 'Да':'Нет'?></li>
@@ -17,8 +17,8 @@
     <li>Уведомлять: <?=$model->useNotification ? 'Да':'Нет'?></li>
     <li>Адрес эл. почты для уведомления: <br> <?=$model->email?></li>
     <li>
-        <?php foreach ($model->files as $img) : ?>
-            <img width="300" src="/files/<?=$img?>" alt="">
-        <?php endforeach ?>
+<!--       <?php //foreach ($model->files as $img) : ?> -->
+<!--            <img width="300" src="/files/--><?//=$img?><!--" alt="">-->
+<!--        <?php //endforeach ?> -->
     </li>
 </ul>

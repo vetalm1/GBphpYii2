@@ -7,6 +7,7 @@ use app\components\ActivityComponent;
 use app\models\Activity;
 use yii\base\Action;
 use yii\bootstrap\ActiveForm;
+use yii\web\HttpException;
 use yii\web\Response;
 
 class CreateAction extends Action
@@ -16,6 +17,10 @@ class CreateAction extends Action
 
     public  function run()
     {
+        // проверяем что пользователь может создавать активность
+        if(!\Yii::$app->rbac->canCreateActivity()) {
+            throw new  HttpException(403, 'Not Auth Action');
+        }
 
         //$model = new Activity();  //-без Юи было так
         // в фреймворке нужно так создавать экземпляр, а не как сверху.
@@ -31,13 +36,12 @@ class CreateAction extends Action
                 return ActiveForm::validate($model); //функция валидейт в активформ возвращает массив, а нужен json, потому см. выше
             }
 
-            if(!\Yii::$app->activity->addActivity($model)){
-                   //$this->name=$model->title;
-                print_r($model->getErrors());
-            } else {
-                $this->dao->saveToDb($model->title, $model->date, $model->isBlocked, 1);
-                return $this->controller->render('view', ['model'=>$model]); // временно закинем в просмотр
+            if(\Yii::$app->activity->addActivity($model)){
+//                   //$this->name=$model->title;
+//                print_r($model->getErrors());
+                return $this->controller->redirect(['/activity/view', 'id'=>$model->id]);
             }
+
         }
 
         return $this->controller->render('create', ['name'=>$this->name, 'model'=>$model]);

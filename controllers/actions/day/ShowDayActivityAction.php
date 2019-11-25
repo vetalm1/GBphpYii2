@@ -23,6 +23,13 @@ class ShowDayActivityAction extends Action
 
         $model = \Yii::$app->day->getModel();
 
+        if(\Yii::$app->request->get('date')) {  // если нет date возвращает null, а аэто false
+            $this->activity = $this->dao->getActivityOnDate(10, \Yii::$app->request->get('date'));
+            return $this->controller->render('showActivityOnDate', [
+                'dayTitle'=>$this->dayTitle,
+                'activity'=>$this->activity
+            ]);
+        }
         // вывод календаря
         $month = date('n', time());
         $year = date('Y', time());

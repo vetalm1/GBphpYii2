@@ -4,6 +4,7 @@ namespace app\components;
 
 use app\models\Day;
 use yii\base\Component;
+use app\components\DAOComponent;
 
 class DayComponent extends Component
 {
@@ -25,32 +26,45 @@ class DayComponent extends Component
         return [false];
     }
 
-//    public function findActivity($date){
-//        return ['активность1'=>$date];
-//    }
+
     public function showCalendar($month , $year){
-//        $month = 12;
-//        $year = 2019;
-        $numDayCurrentMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
-        $numDayPreviousMonth = date('t', mktime(0, 0, 0, $month-1, 1, $year));
-//        $countDayNextMonth = date('t', mktime(0, 0, 0, $month+1, 1, $year));
-        date('w', mktime(0, 0, 0, $month, 1, $year)) == 0 ?
+        // готовим данные для вывода календаря на указанный месяц и год
+        $quantityDaysCurrentMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
+        $quantityDaysPreviousMonth = date('t', mktime(0, 0, 0, ($month-1), 1, $year));
+        (date('w', mktime(0, 0, 0, $month, 1, $year)) == 0) ?
             $numWeek = 7:
             $numWeek = date('w', mktime(0, 0, 0, $month, 1, $year)) ;
-        $numWeekLastDay = date('w', mktime(0, 0, 0, $month, (int)$numDayCurrentMonth, $year));
+        $numWeekLastDay = date('w', mktime(0, 0, 0, $month, (int)$quantityDaysCurrentMonth, $year));
         $str='';
         $numDay=1-$numWeek+1;
 
-        for ($numDay; $numDay<=$numDayCurrentMonth; $numDay++){
+        // готовим массив с днями активности для выделения их в календаре
+        ($numWeek == 7)? $previousMonth = $month : $previousMonth = $month-1;
+        $firstDayCalendar = date('Y-m-d', mktime(0, 0, 0, $previousMonth, (int)$quantityDaysPreviousMonth+(int)$numDay, $year));
+        ($numWeekLastDay == 0)? $nextMonth = $month : $nextMonth = $month+1 ;
+        $lastDayCalendar = date('Y-m-d', mktime(0, 0, 0, $nextMonth, 7-$numWeekLastDay, $year));
+        $activities = \Yii::$app->dao->getActivityMonth($firstDayCalendar, $lastDayCalendar);
+
+        $daysWithActivities =[]; //массив с днями в которых есть активность
+        foreach ($activities as $dayActivities) {
+            $day = strtotime($dayActivities['dateStart']);
+            array_push($daysWithActivities, date('d', $day));
+        }
+
+        // выводим календарь
+        for ($numDay; $numDay<=$quantityDaysCurrentMonth; $numDay++){
             if($numDay<=0){
-                $Nd=(int)$numDayPreviousMonth+(int)$numDay;
-                $str .= '<a href="#" class="calendarItem another-month">'.$Nd.'</a>';
+                $Nd=(int)$quantityDaysPreviousMonth+(int)$numDay;
+                in_array($Nd, $daysWithActivities)? $bold = 'bold': $bold = '' ; // если есть такая активность то выделяем ее в календаре
+                $str .= '<a href="/day/showDayActivity?date='.$year.'-'.($month-1).'-'.$Nd.'" class="calendarItem another-month '.$bold.'">'.$Nd.'</a>';
             }else  {
                 $weekDay=date('w', mktime(0, 0, 0, $month, $numDay, $year));
                 if ($weekDay==0 || $weekDay == 6){
-                    $str .= '<a href="#" class="calendarItem red">' . $numDay . '</a>';
+                    in_array($numDay, $daysWithActivities)? $bold = 'bold': $bold = '' ;
+                    $str .= '<a href="/day/showDayActivity?date='.$year.'-'.$month.'-'.$numDay.'" class="calendarItem red '.$bold.'">' . $numDay . '</a>';
                 } else {
-                    $str .= '<a href="#" class="calendarItem">' . $numDay . '</a>';
+                    in_array($numDay, $daysWithActivities)? $bold = 'bold': $bold = '' ;
+                    $str .= '<a href="/day/showDayActivity?date='.$year.'-'.$month.'-'.$numDay.'" class="calendarItem '.$bold.'">' . $numDay . '</a>';
                 }
             }
         }
@@ -58,7 +72,8 @@ class DayComponent extends Component
         while ((7-$numWeekLastDay)>0) {
             $numWeekLastDay++;
             $Nd+=1;
-            $str .= '<a href="#" class="calendarItem another-month">' . $Nd . '</a>';
+            in_array($Nd, $daysWithActivities)? $bold = 'bold': $bold = '' ;
+            $str .= '<a href="/day/showDayActivity?date='.$year.'-'.($month+1).'-'.$Nd.'" class="calendarItem another-month '.$bold.'">' . $Nd . '</a>';
         }
         $this->Calendar = $str;
         return $this->Calendar;

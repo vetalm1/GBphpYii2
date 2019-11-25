@@ -8,12 +8,12 @@ use app\models\rules\BlackListRule;
 use Egulias\EmailValidator\Warning\EmailTooLong;
 use yii\base\Model;
 
-class Activity extends Model
+class Activity extends ActivityBase //Model
 {
-    public $title;
-    public $description;
-    public $date;
-    public $isBlocked;
+//    public $title;
+//    public $description;
+//    public $date;
+//    public $isBlocked;
     public  $isRepeat;
     public $priority;
 
@@ -24,31 +24,31 @@ class Activity extends Model
     const REPEAT_TYPE=[self::DAY=>'Каждый день', self::WEEK=>'Каждую неделю',
                        self::MONTH=>'Каждый месяц'];
     public $repeatEmail;
-    public $email;
+//    public $email;
     public $useNotification;
 
-    Public $files;
+    Public $files;  //возможно нужно убрать???
 
-    public function  beforeValidate()
-    {
-        if (!empty($this->date)){ //
-            $date=\DateTime::createFromFormat('d.m.Y', $this->date); // преобразовать в формат
-            if ($date) {
-                $this->date=$date->format('Y-m-d'); // если преобразование состоялось то присвоим в $this->date
-            }
-        }
-        return parent::beforeValidate();
-    }
+//    public function  beforeValidate()
+//    {
+//        if (!empty($this->date)){ //
+//            $date=\DateTime::createFromFormat('d.m.Y', $this->date); // преобразовать в формат
+//            if ($date) {
+//                $this->date=$date->format('Y-m-d'); // если преобразование состоялось то присвоим в $this->date
+//            }
+//        }
+//        return parent::beforeValidate();
+//    }
 
     // чтобы появилась валидация нужно переопределить функцию  rules
     public function rules()// задать правила
     {
-        return [
+        return array_merge( [ // объединим с правилами родителя
             ['title', 'required'],
             [['files'], 'file', 'extensions' => ['jpg', 'png', 'gif'], 'maxFiles' => 10],
             [['description'], 'string', 'max' => 250, 'min'=>5],
-            ['date', 'string'],
-            ['date', 'date', 'format' => 'php:Y-m-d'], //формат даты
+            ['dateStart', 'string'],
+            //['date', 'date', 'format' => 'php:Y-m-d'], //формат даты
             [['isBlocked', 'isRepeat', 'priority', 'useNotification'], 'boolean'],
             ['email', 'email'],
             ['email', 'required', 'when'=>function($model){
@@ -62,7 +62,7 @@ class Activity extends Model
             ['title', 'trim'],  //убирает пробелы начало-конец,
             ['title', BlackListRule::class, 'list'=>['Шаурма']] // вынесен блеклист в отдельную функцию и  в отдельный файл (rules-BlacklistRule) чтобы было по солид
             //['title', 'validBlackList']  // вынесен блеклист в отдельную функцию(func=validBlackList см. ниже), типа кастомное правило, валидируется в данном случае на сервере
-        ];
+        ], parent::rules()); // объединим с правилами родителя
     }
 
 //    public function  validBlackList($attribute){  // кастомное правило по итогу вынесли в отдельный файл(rules-BlacklistRule) для примера (в отдельном файле по )

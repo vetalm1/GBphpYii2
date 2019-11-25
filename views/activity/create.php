@@ -12,7 +12,7 @@
         <?php $form = \yii\bootstrap\ActiveForm::begin();?>  <?//это такой способ создания формы?>
             <?=$form->field($model, 'title');?>
             <?=$form->field($model, 'description')->textarea();?> <!--<?php//можно добавить атрибут тегу textarea(['data-des'=>22]) ?>-->
-            <?=$form->field($model, 'date');?> <?// можно добавить формат //input('date')?>
+            <?=$form->field($model, 'dateStart');?> <?// можно добавить формат //input('date')?>
             <?=$form->field($model, 'priority')->checkbox(['checked' => true]);?>
             <?=$form->field($model, 'isBlocked')->checkbox();?>
             <?=$form->field($model, 'isRepeat')->checkbox();?>

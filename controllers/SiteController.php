@@ -12,7 +12,7 @@ use app\models\ContactForm;
 
 use app\base\BaseController;
 
-class SiteController extends BaseController
+class SiteController extends Controller //BaseController
 {
     /**
      * {@inheritdoc}

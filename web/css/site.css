@@ -139,7 +139,7 @@ a.desc:after {
     border-radius: 3px;
 }
 .red {
-    background-color: #FEEFEC;
+    background-color: #fdf3cc /*#FEEFEC;*/
 }
 .calendar-weekdays{
     display: flex;
@@ -154,6 +154,11 @@ a.desc:after {
     color: lightgrey;
     background-color: aliceblue;
 
+}
+.bold {
+    color: #337ab7;
+    font-weight: bolder;
+    text-decoration: underline;
 }
 .current-activity {
     display: flex;

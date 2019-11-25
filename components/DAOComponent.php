@@ -41,9 +41,21 @@ class DAOComponent extends Component
 
     public function saveToDb($title, $dateStart, $isBlocked, $userId){
         $this->getConnection()->createCommand()
-            ->insert('activity',['title'=>$title, 'dateStart'=>$dateStart, 'isBlocked'=>$isBlocked, 'userId'=>$userId,])
+            ->insert('activity',['title'=>$title, 'dateStart'=>$dateStart, 'isBlocked'=>$isBlocked, 'userId'=>$userId,])  // незабыть сделать подготовку
             ->execute();
     }
+
+    public function getActivityMonth($firstDayCalendar, $lastDayCalendar){
+        $query=new Query();
+        $record=$query
+            ->select('dateStart')
+            ->from('activity')
+            ->andWhere('dateStart>:firstDate', [':firstDate' => $firstDayCalendar])
+            ->andWhere('dateStart<=:lastDate', [':lastDate' => $lastDayCalendar])
+            ->createCommand()->query();
+        return $record;
+    }
+
 
     public function getUsersList(): ?array
     {

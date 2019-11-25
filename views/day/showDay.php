@@ -6,12 +6,12 @@
 
 <div class="row">
     <div class="col-md-3">
-        <?php $form = \yii\bootstrap\ActiveForm::begin();?>  <?//это такой способ создания формы?>
-        <?=$form->field($model, 'date')->input('date');?>
-        <div class="form-group">
-            <button type="submit" class="btn btn-primary">Показать на дату</button>
-        </div>
-        <?php \yii\bootstrap\ActiveForm::end(); ?>
+<!--        <?php //$form = \yii\bootstrap\ActiveForm::begin();?>  <?////это такой способ создания формы?> -->
+<!--        <?//=$form->field($model, 'date')->input('date');?> -->
+<!--        <div class="form-group">-->
+<!--            <button type="submit" class="btn btn-primary">Показать на дату</button>-->
+<!--        </div>-->
+<!--        <?php //\yii\bootstrap\ActiveForm::end(); ?> -->
 
         <div class="calendar-wrap">
             <div class="calendar-weekdays">Пн.</div>
@@ -23,6 +23,7 @@
             <div class="calendar-weekdays">Вс.</div>
 
             <?=$calendar?>
+
         </div>
     </div>
 </div>

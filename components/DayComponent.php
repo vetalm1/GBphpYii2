@@ -39,8 +39,9 @@ class DayComponent extends Component
         $numDay=1-$numWeek+1;
 
         // готовим массив с днями активности для выделения их в календаре
-        ($numWeek == 7)? $previousMonth = $month : $previousMonth = $month-1;
-        $firstDayCalendar = date('Y-m-d', mktime(0, 0, 0, $previousMonth, (int)$quantityDaysPreviousMonth+(int)$numDay, $year));
+        //($numWeek == 7)? $previousMonth = $month : $previousMonth = $month-1;
+        $previousMonth = $month-1;
+       echo $firstDayCalendar = date('Y-m-d', mktime(0, 0, 0, $previousMonth, (int)$quantityDaysPreviousMonth+(int)$numDay, $year));
         ($numWeekLastDay == 0)? $nextMonth = $month : $nextMonth = $month+1 ;
         $lastDayCalendar = date('Y-m-d', mktime(0, 0, 0, $nextMonth, 7-$numWeekLastDay, $year));
         $activities = \Yii::$app->dao->getActivityMonth($firstDayCalendar, $lastDayCalendar);
@@ -51,6 +52,7 @@ class DayComponent extends Component
             array_push($daysWithActivities, date('d', $day));
         }
 
+        print_r($daysWithActivities);
         // выводим календарь
         for ($numDay; $numDay<=$quantityDaysCurrentMonth; $numDay++){
             if($numDay<=0){

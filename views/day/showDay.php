@@ -32,7 +32,8 @@
 <div class="current-activity">
     <?php foreach ($ActivityCurrentDay as $item) : ?>
         <div class="col-md-3 day-activity">
-            <h4 class="mt-4 text-primary"><?=$item['title']?> </h4>
+            <a href="/activity/view?id=<?=$item['id']?>"><h4 class="mt-4 text-primary"><?=$item['title']?></a>
+
             <h6 class="mt-4 text-primary"><?=$item['dateStart']?> </h6>
         </div>
     <?php endforeach ?>
@@ -42,7 +43,7 @@
 <div class="current-activity">
     <?php foreach ($activity as $item) : ?>
         <div class="col-md-3 day-activity">
-            <h4 class="mt-4 text-primary"><?=$item['title']?> </h4>
+            <a href="/activity/view?id=<?=$item['id']?>"><h4 class="mt-4 text-primary"><?=$item['title']?></a>
             <h6 class="mt-4 text-primary"><?=$item['dateStart']?> </h6>
         </div>
     <?php endforeach ?>

@@ -22,3 +22,5 @@
 <!--        <?php //endforeach ?> -->
     </li>
 </ul>
+
+<a href="/activity/update?id=<?=$model->id ?>"><h4 class="mt-4 text-primary">Редактировать</a>

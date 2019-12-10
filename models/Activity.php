@@ -4,6 +4,7 @@
 namespace app\models;
 
 
+use app\behaviors\DateCreatedBehavior;
 use app\models\rules\BlackListRule;
 use Egulias\EmailValidator\Warning\EmailTooLong;
 use yii\base\Model;
@@ -27,7 +28,14 @@ class Activity extends ActivityBase //Model
 //    public $email;
     public $useNotification;
 
-    Public $files;  //возможно нужно убрать???
+    Public $files;
+
+    public function behaviors()  //подключаем поведение
+    {
+        return [
+            ['class'=>DateCreatedBehavior::class, 'attributeName' => 'createAT']
+        ];
+    }
 
 //    public function  beforeValidate()
 //    {

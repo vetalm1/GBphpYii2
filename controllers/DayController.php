@@ -10,10 +10,10 @@ use app\controllers\actions\day\ShowDayActivityAction;
 
 class DayController extends BaseController
 {
-    public function actions(/*$id=Null*/) {
+    public function actions() {
         return [
             'showDayActivity'=> ['class'=>ShowDayActivityAction::class, 'dayTitle'=>'Список активностей на сегодня'],
-          //  'showDataActivity'=>['class'=>showDataActivityAction::class, /*'param'=>$id*/]
+          //  'showDataActivity'=>['class'=>showDataActivityAction::class, 'title'=>'редактирование активности']
         ];
     }
 

@@ -41,8 +41,8 @@ AppAsset::register($this);
            // ['label' => 'HW1', 'url' => ['/teacher/student']],
             ['label' => 'Создать активность', 'url' => ['/activity/create']],
             ['label' => 'Просмотр Активностей', 'url' => ['/day/showDayActivity']],
+            ['label' => 'CRUD gii', 'url' => ['/activity-crud/index']],
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' =>['/auth/sign-in']] // ['/site/login']]

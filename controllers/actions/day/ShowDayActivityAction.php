@@ -12,6 +12,8 @@ class ShowDayActivityAction extends Action
     public $dayTitle;
     public $calendar;
     private $dao;
+    public $month;
+    public $year;
     public $activity;
     public $ActivityCurrentDay;
 
@@ -30,10 +32,16 @@ class ShowDayActivityAction extends Action
                 'activity'=>$this->activity
             ]);
         }
+
+//        if(\Yii::$app->request->get('month')) {
+//           $this->month =\Yii::$app->request->get('month');
+//        } else {$this->month = date('n', time());}
+
         // вывод календаря
-        $month = date('n', time());
-        $year = date('Y', time());
-        $this->calendar = \Yii::$app->day->showCalendar($month , $year);
+        $this->month = date('n', time());
+        $this->year = date('Y', time());
+        $this->calendar = \Yii::$app->day->showCalendar($this->month , $this->year);
+
 
         if (\Yii::$app->request->isPost){
             $model->load(\Yii::$app->request->post());
@@ -50,6 +58,7 @@ class ShowDayActivityAction extends Action
 
         return $this->controller->render('showDay',
             [
+                'month'=>$this->month,
                 'dayTitle'=>$this->dayTitle,
                 'calendar'=>$this->calendar,
                 'activity'=>$this->activity,

@@ -28,7 +28,9 @@ $config = [
         'auth'=> ['class'=> \app\components\AuthComponent::class], // компонент авторизации
 
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            //'class' => 'yii\caching\FileCache',
+            'class' => 'yii\caching\MemCache',
+            'useMemcached' => true
         ],
         'user' => [
             'identityClass' => 'app\models\Users',  // класс который отвечает за identity interface изменили на наш

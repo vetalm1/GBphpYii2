@@ -16,7 +16,9 @@ class DAOComponent extends Component
         $record=$query->from('activity')
                       ->limit($num)
                       ->andWhere('dateStart>:date', [':date' => $date])
-                      ->createCommand()->query();
+                      ->createCommand()
+                  //    ->cache(15)
+                      ->query();
         return $record;
     }
 
@@ -25,7 +27,8 @@ class DAOComponent extends Component
         $record=$query->from('activity')
             ->limit($num)
             ->andWhere('dateStart=:date', [':date' => $date])
-            ->createCommand()->query();
+            ->createCommand()
+            ->query();
         return $record;
     }
 
@@ -64,7 +67,9 @@ class DAOComponent extends Component
     }
     public function getActivityUser($email):?array {
         $sql='select * from activity where userId=:user';
-        return $this->getConnection()->createCommand($sql,[':user'=>$email])->queryAll();
+        return $this->getConnection()->createCommand($sql,[':user'=>$email])
+           // ->cache(15,new DbDependency(['sql' => 'select max(id) from activity where userId='.(int)$email]))
+            ->queryAll();
     }
     public function getActivity(){
         $query=new Query();
@@ -74,6 +79,7 @@ class DAOComponent extends Component
 //            ->andWhere('is=:userd',[':userd' => 3])
             ->limit(2)
             ->orderBy(['dateStart'=>SORT_DESC])
+           // ->cache(10,new TagDependency(['tags' => ['tag1','tag2']]))
             ->one($this->getConnection());
 //        ->createCommand()->rawSql;
         return $record;

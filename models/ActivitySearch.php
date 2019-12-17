@@ -18,7 +18,7 @@ class ActivitySearch extends Activity
             'sort' => [
                 'defaultOrder' =>['dateStart'=>SORT_DESC]
             ],
-            'pagination' =>  ['pageSize'=>5] //количество записей отображения в таблице
+            'pagination' =>  ['pageSize'=>7] //количество записей отображения в таблице
         ]
         );
 

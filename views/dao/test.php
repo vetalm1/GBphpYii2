@@ -2,11 +2,13 @@
 /* @var $this \yii\web\View */
 ?>
 <div class="row">
-    <div class="col-md-6">
+    <?php if($this->beginCache('view1',['duration'=>20])):?>
+        <div class="col-md-6">
         <pre>
             <?=print_r($users);?>
         </pre>
-    </div>
+        </div>
+        <?php $this->endCache(); endif; ?>
     <div class="col-md-6">
         <pre>
             <?=print_r($activityUser);?>

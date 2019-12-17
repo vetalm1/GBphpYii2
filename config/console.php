@@ -20,6 +20,7 @@ $config = [
             'class' => 'yii\caching\FileCache',
         ],
         'authManager'=> ['class' => 'yii\rbac\DbManager'],
+        'activity' => ['class' => \app\components\ActivityComponent::class],
         'log' => [
             'targets' => [
                 [
@@ -27,6 +28,26 @@ $config = [
                     'levels' => ['error', 'warning'],
                 ],
             ],
+        ],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            'useFileTransport' => false,
+            'enableSwiftMailerLogging' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.yandex.ru',
+                'username' => 'vetalmXXXX@yandex.ru',
+                'password' => 'xxxxxxxxx',
+                'port' => '465',
+                'encryption' => 'ssl',
+                'streamOptions' => [
+                    'ssl' => [
+                                'allow_self_signed' => true,
+                                'verify_peer' => false,
+                                'verify_peer_name' => false,
+                    ]
+                ]
+            ]
         ],
         'db' => $db,
     ],

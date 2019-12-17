@@ -38,7 +38,7 @@ $this->title = 'My Yii Application';
                 <p><a class="btn btn-default" href="http://www.yiiframework.com/forum/">Yii Forum &raquo;</a></p>
             </div>
             <div class="col-lg-4">
-                <a href="#"><h3>Редактировать Активность</h3></a>
+                <a href="/activity/index"><h3>Редактировать Активность</h3></a>
 
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et
                     dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip

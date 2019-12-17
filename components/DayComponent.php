@@ -27,57 +27,52 @@ class DayComponent extends Component
     }
 
 
-    public function showCalendar($month , $year){
-        // готовим данные для вывода календаря на указанный месяц и год
-        $quantityDaysCurrentMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
-        $quantityDaysPreviousMonth = date('t', mktime(0, 0, 0, ($month-1), 1, $year));
-        (date('w', mktime(0, 0, 0, $month, 1, $year)) == 0) ?
+    public function ShowCalendar($month , $year){
+        $yearPreviousMonth = $year;
+        $month-1 ==0? $yearPreviousMonth=$year-1 : $yearPreviousMonth=$year;
+        $month-1 ==0? $PreviousMonth=12 : $PreviousMonth=$month-1;
+        $quantityDaysPreviousMonth = date('t', mktime(0, 0, 0, $PreviousMonth, 1, $yearPreviousMonth));
+        (date('w', mktime(0, 0, 0, $PreviousMonth, $quantityDaysPreviousMonth, $yearPreviousMonth)) == 0) ?
             $numWeek = 7:
-            $numWeek = date('w', mktime(0, 0, 0, $month, 1, $year)) ;
-        $numWeekLastDay = date('w', mktime(0, 0, 0, $month, (int)$quantityDaysCurrentMonth, $year));
-        $str='';
-        $numDay=1-$numWeek+1;
+            $numWeek = date('w', mktime(0, 0, 0, $PreviousMonth, $quantityDaysPreviousMonth, $yearPreviousMonth)) ;
+        $firstDateCalendar = date('Y-m-d', mktime(0, 0, 0, $PreviousMonth,
+             $quantityDaysPreviousMonth - $numWeek+1,
+            $yearPreviousMonth));
 
-        // готовим массив с днями активности для выделения их в календаре
-        //($numWeek == 7)? $previousMonth = $month : $previousMonth = $month-1;
-        $previousMonth = $month-1;
-       echo $firstDayCalendar = date('Y-m-d', mktime(0, 0, 0, $previousMonth, (int)$quantityDaysPreviousMonth+(int)$numDay, $year));
-        ($numWeekLastDay == 0)? $nextMonth = $month : $nextMonth = $month+1 ;
-        $lastDayCalendar = date('Y-m-d', mktime(0, 0, 0, $nextMonth, 7-$numWeekLastDay, $year));
-        $activities = \Yii::$app->dao->getActivityMonth($firstDayCalendar, $lastDayCalendar);
+        $month==12? $nextMonth = 1: $nextMonth = $month+1;
+        $month==12? $nextYear = $year+1: $nextYear = $year;
+        $quantityDaysCurrentMonth = date('t', mktime(0, 0, 0, $month, 1, $year));
+        $lastDateCalendar = date('Y-m-d', mktime(0, 0, 0, $nextMonth, 42-$numWeek-$quantityDaysCurrentMonth, $nextYear));
 
-        $daysWithActivities =[]; //массив с днями в которых есть активность
+        $activities = \Yii::$app->dao->getActivityMonth($firstDateCalendar, $lastDateCalendar);  //Переделать на ActiveRecord
+
+        $daysWithActivities =[];
         foreach ($activities as $dayActivities) {
             $day = strtotime($dayActivities['dateStart']);
-            array_push($daysWithActivities, date('d', $day));
+            array_push($daysWithActivities, date('Y-m-d', $day));
+        }
+        //echo $daysWithActivities[0];
+
+        $calendar=[];
+        $date = new \DateTime($firstDateCalendar);
+        for ($i=0; $i<42; $i++ ){
+            $i==0? true: $date->modify('+1 day');
+            $weekDay=date('w', strtotime($date->format('Y-m-d')));
+            if ($weekDay==0 || $weekDay == 6){
+                $workDay = 'red';
+            } else {$workDay = '';}
+            in_array($date->format('Y-m-d'), $daysWithActivities)? $activityExist = 'bold': $activityExist = '';
+            $date->format('m') != $month? $anotherMonth = 'another-month' : $anotherMonth = '';
+            $property =[
+                'date'=>$date->format('Y-m-d'),
+                'dayNum'=>$date->format('d'),
+                'anotherMonth' => $anotherMonth,
+                'workDay'=>$workDay,
+                'activity'=>$activityExist];
+            array_push($calendar, $property);
+
         }
 
-        print_r($daysWithActivities);
-        // выводим календарь
-        for ($numDay; $numDay<=$quantityDaysCurrentMonth; $numDay++){
-            if($numDay<=0){
-                $Nd=(int)$quantityDaysPreviousMonth+(int)$numDay;
-                in_array($Nd, $daysWithActivities)? $bold = 'bold': $bold = '' ; // если есть такая активность то выделяем ее в календаре
-                $str .= '<a href="/day/showDayActivity?date='.$year.'-'.($month-1).'-'.$Nd.'" class="calendarItem another-month '.$bold.'">'.$Nd.'</a>';
-            }else  {
-                $weekDay=date('w', mktime(0, 0, 0, $month, $numDay, $year));
-                if ($weekDay==0 || $weekDay == 6){
-                    in_array($numDay, $daysWithActivities)? $bold = 'bold': $bold = '' ;
-                    $str .= '<a href="/day/showDayActivity?date='.$year.'-'.$month.'-'.$numDay.'" class="calendarItem red '.$bold.'">' . $numDay . '</a>';
-                } else {
-                    in_array($numDay, $daysWithActivities)? $bold = 'bold': $bold = '' ;
-                    $str .= '<a href="/day/showDayActivity?date='.$year.'-'.$month.'-'.$numDay.'" class="calendarItem '.$bold.'">' . $numDay . '</a>';
-                }
-            }
-        }
-        $Nd=0;
-        while ((7-$numWeekLastDay)>0) {
-            $numWeekLastDay++;
-            $Nd+=1;
-            in_array($Nd, $daysWithActivities)? $bold = 'bold': $bold = '' ;
-            $str .= '<a href="/day/showDayActivity?date='.$year.'-'.($month+1).'-'.$Nd.'" class="calendarItem another-month '.$bold.'">' . $Nd . '</a>';
-        }
-        $this->Calendar = $str;
-        return $this->Calendar;
+        return $calendar;
     }
 }

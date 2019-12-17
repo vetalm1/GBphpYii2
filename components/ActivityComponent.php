@@ -42,6 +42,13 @@ class ActivityComponent extends Component
         return false;
     }
 
+    public function findTodayNotifActivity(){
+        return Activity::find()->andWhere('email is not null')
+            ->andWhere('dateStart>=:date',[':date' => date('Y-m-d')])
+            ->andWhere('dateStart<=:date1',[':date1' => date('Y-m-d').' 23:59:59'])->all();
+    }
+
+
   /////// по солид нужно было бы вынести в отдельный компонент работы с файлами
 //    private function saveFile(UploadedFile $file): ?string {  // ? перед стрингом это значит или стринг вернет или null
 //            $name = $this->genFileName($file);

@@ -13,6 +13,9 @@
 <!--        </div>-->
 <!--        <?php //\yii\bootstrap\ActiveForm::end(); ?> -->
 
+<!--        <a href="/day/showDayActivity?month=--><?//=$month-1?><!--"> Предыдущий </a>-->
+<!--        <a href="/day/showDayActivity?month=--><?//=$month+1?><!--"> Следующий </a>-->
+
         <div class="calendar-wrap">
             <div class="calendar-weekdays">Пн.</div>
             <div class="calendar-weekdays">Вт.</div>
@@ -22,7 +25,12 @@
             <div class="calendar-weekdays">Сб.</div>
             <div class="calendar-weekdays">Вс.</div>
 
-            <?=$calendar?>
+            <?php foreach ($calendar as $day) : ?>
+                    <a href="/day/showDayActivity?date=<?=$day['date']?>"
+                       class="calendarItem <?=$day['workDay']?> <?=$day['anotherMonth']?> <?=$day['activity']?> ">
+                       <?=$day['dayNum']?>
+                    </a>
+            <?php endforeach ?>
 
         </div>
     </div>
@@ -39,7 +47,7 @@
     <?php endforeach ?>
 </div>
 
-<h3 class="mt-4 text-primary"> 3 ближайшие Активности </h3>
+<h3 class="mt-4 text-primary"> 3 ближайшие Активности текущего месяца </h3>
 <div class="current-activity">
     <?php foreach ($activity as $item) : ?>
         <div class="col-md-3 day-activity">

@@ -113,3 +113,59 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+
+/*calendar style */
+.calendar-wrap {
+    width: 280px;
+    /*height: 280px;*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.calendarItem {
+    display: flex;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    background-color: lightcyan;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+.red {
+    background-color: #fdf3cc /*#FEEFEC;*/
+}
+.calendar-weekdays{
+    display: flex;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+.another-month{
+    color: lightgrey;
+    background-color: aliceblue;
+
+}
+.bold {
+    color: #337ab7;
+    font-weight: bolder;
+    text-decoration: underline;
+}
+.current-activity {
+    display: flex;
+    flex-direction: column;
+}
+.day-activity{
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+    margin: 10px 0px;
+}

@@ -29,7 +29,7 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Приложение Ежедневник', //Yii::$app->name,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -38,14 +38,15 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'HW1', 'url' => ['/teacher/student']],
-            ['label' => 'HW2', 'url' => ['/activity/create']],
-            ['label' => 'HW2(2)', 'url' => ['/day/showDayActivity']],
+           // ['label' => 'HW1', 'url' => ['/teacher/student']],
+            ['label' => 'Создать активность', 'url' => ['/activity/create']],
+            ['label' => 'Календарь', 'url' => ['/day/showDayActivity']],
+            ['label' => 'Все активности', 'url' => ['/activity/index']],
+            ['label' => 'CRUD gii', 'url' => ['/activity-crud/index']],
             ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
             ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Login', 'url' =>['/auth/sign-in']] // ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
@@ -66,6 +67,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
+        <p><a href="<?= isset($this->params['lastPage']) ? $this->params['lastPage'] : '';?>">Предыдущая страница: <?= isset($this->params['lastPage']) ? $this->params['lastPage'] : '';?></a></p>
         <?= $content ?>
     </div>
 </div>

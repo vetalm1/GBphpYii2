@@ -7,9 +7,9 @@ namespace app\controllers\actions\day;
 use yii\base\Action;
 use app\components\DayComponent;
 use app\components\DAOComponent;
-class ShowDayActivityAction extends Action
+class showMonthActivityAction extends Action
 {
-    public $dayTitle;
+    public $monthTitle;
     public $calendar;
     private $dao;
     public $month;
@@ -23,9 +23,10 @@ class ShowDayActivityAction extends Action
         $this->activity = $this->dao->getAnyActivity(3, date('Y-m-d'));
         $this->ActivityCurrentDay = $this->dao->getActivityCurrentDay(date('Y-m-d'));
 
-        if(\Yii::$app->request->get('date')) {  // если нет date возвращает null, а аэто false
+        // просмотр активностей выбранного дня до 10 шт.
+        if(\Yii::$app->request->get('date')) {
             $this->activity = $this->dao->getActivityOnDate(10, \Yii::$app->request->get('date'));
-            $this->dayTitle='Список активностей на '.date('d.m.Y',strtotime ( \Yii::$app->request->get('date')));
+            $this->monthTitle='Список активностей на '.date('d.m.Y',strtotime ( \Yii::$app->request->get('date')));
             return $this->controller->render('showActivityOnDate', [
                 'dayTitle'=>$this->dayTitle,
                 'activity'=>$this->activity
@@ -41,10 +42,10 @@ class ShowDayActivityAction extends Action
         $this->year = date('Y', time());
         $this->calendar = \Yii::$app->day->showCalendar($this->month , $this->year);
 
-        return $this->controller->render('showDay',
+        return $this->controller->render('showActivityMonth',
             [
                 'month'=>$this->month,
-                'dayTitle'=>$this->dayTitle,
+                'dayTitle'=>$this->monthTitle,
                 'calendar'=>$this->calendar,
                 'activity'=>$this->activity,
                 //'model'=>$model,

@@ -37,8 +37,6 @@ class CreateAction extends Action
             }
 
             if(\Yii::$app->activity->addActivity($model)){
-//                   //$this->name=$model->title;
-//                print_r($model->getErrors());
                 return $this->controller->redirect(['/activity/view', 'id'=>$model->id]);
             }
 

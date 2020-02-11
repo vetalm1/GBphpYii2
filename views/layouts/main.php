@@ -40,7 +40,8 @@ AppAsset::register($this);
         'items' => [
            // ['label' => 'HW1', 'url' => ['/teacher/student']],
             ['label' => 'Создать активность', 'url' => ['/activity/create']],
-            ['label' => 'Календарь', 'url' => ['/day/showDayActivity']],
+            ['label' => 'На сегодня', 'url' => ['/day/showDayActivity']],
+            ['label' => 'Календарь', 'url' => ['/day/showMonthActivity']],
             ['label' => 'Все активности', 'url' => ['/activity/index']],
             ['label' => 'CRUD gii', 'url' => ['/activity-crud/index']],
             ['label' => 'Home', 'url' => ['/site/index']],

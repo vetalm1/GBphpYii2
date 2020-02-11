@@ -20,7 +20,6 @@ class ActivityComponent extends Component
     {
         $activity->files=UploadedFile::getInstances($activity,'files'); //создаст экземпляр класса UploadedFile со всеми настройками файла который загружен /
                                                 // буквочку s не забыть приписать чтобы несколько
-
         $activity->userId=\Yii::$app->user->getIdentity()->id;  // userid присваиваем id текущего аутентифицированного пользователя
 
         if($activity->validate()){ //когда файлы будем сохранять эта конструкция не сработает нужно ее както обыграть через json
@@ -57,7 +56,7 @@ class ActivityComponent extends Component
 //                return $name;
 //            }
 //     }  return null;
-    private function saveFile($file): ?string {
+    private function saveFile($file){
         $names=[];
         foreach ($file as  $fileItem) {
             $name = 'files/' . $this->genFileName($fileItem);  // почему-то с @webroot не заработало

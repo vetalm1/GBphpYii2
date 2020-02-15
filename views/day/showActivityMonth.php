@@ -6,8 +6,8 @@
 <div class="row">
     <div class="col-md-3">
         <?php $date = new \DateTime($calendar[15]['date']); ?>
-        <a href="/day/showMonthActivity?changeMonth=<?php echo $date->modify('-1 month')->format('Y-m-d');?>"> Предыдущий </a>
-        <a href="/day/showMonthActivity?changeMonth=<?php echo $date->modify('+2 month')->format('Y-m-d');?>"> Следующий </a>
+        <a href="/day/showMonthActivity?changeMonth=<?php echo $date->modify('-1 month')->format('Y-m-d');?>"> &lArr;Предыдущий -- </a>
+        <a href="/day/showMonthActivity?changeMonth=<?php echo $date->modify('+2 month')->format('Y-m-d');?>"> -- Следующий&rArr; </a>
         <div class="big-calendar-wrap">
             <div class="big-calendar-weekdays">Пн.</div>
             <div class="big-calendar-weekdays">Вт.</div>

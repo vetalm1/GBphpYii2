@@ -26,25 +26,29 @@ class showMonthActivityAction extends Action
         // просмотр активностей выбранного дня до 10 шт.
         if(\Yii::$app->request->get('date')) {
             $this->activity = $this->dao->getActivityOnDate(10, \Yii::$app->request->get('date'));
-            $this->monthTitle='Список активностей на '.date('d.m.Y',strtotime ( \Yii::$app->request->get('date')));
+            $this->monthTitle='Список активностей на '.
+                               date('d.m.Y',strtotime (\Yii::$app->request->get('date')));
             return $this->controller->render('showActivityOnDate', [
                 'dayTitle'=>$this->dayTitle,
                 'activity'=>$this->activity
             ]);
         }
+        // сменить месяц
+        if(\Yii::$app->request->get('changeMonth')) {
+           $this->month =date('n' , strtotime(\Yii::$app->request->get('changeMonth')));
+           $this->year =date('Y' , strtotime(\Yii::$app->request->get('changeMonth')));
+           $this->calendar = \Yii::$app->day->generateCalendar($this->month , $this->year);
+        } else {
 
-//        if(\Yii::$app->request->get('month')) {
-//           $this->month =\Yii::$app->request->get('month');
-//        } else {$this->month = date('n', time());}
-
-        // вывод календаря
-        $this->month = date('n', time());
-        $this->year = date('Y', time());
-        $this->calendar = \Yii::$app->day->showCalendar($this->month , $this->year);
+            // вывод календаря
+            $this->month = date('n', time());
+            $this->year = date('Y', time());
+            $this->calendar = \Yii::$app->day->generateCalendar($this->month, $this->year);
+        }
 
         return $this->controller->render('showActivityMonth',
             [
-                'month'=>$this->month,
+                'month'=>\Yii::$app->day->monthFullName($this->month),
                 'dayTitle'=>$this->monthTitle,
                 'calendar'=>$this->calendar,
                 'activity'=>$this->activity,

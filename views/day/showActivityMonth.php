@@ -1,15 +1,13 @@
 <?php
 ?>
-
-<h3><?=$dayTitle?></h3>
+<h3><?=$dayTitle?> <?php echo $month." ".date(' Y' , strtotime($calendar[15]['date']))?></h3>
 
 
 <div class="row">
     <div class="col-md-3">
-
-<!--        <a href="/day/showDayActivity?month=--><?//=$month-1?><!--"> Предыдущий </a>-->
-<!--        <a href="/day/showDayActivity?month=--><?//=$month+1?><!--"> Следующий </a>-->
-
+        <?php $date = new \DateTime($calendar[15]['date']); ?>
+        <a href="/day/showMonthActivity?changeMonth=<?php echo $date->modify('-1 month')->format('Y-m-d');?>"> Предыдущий </a>
+        <a href="/day/showMonthActivity?changeMonth=<?php echo $date->modify('+2 month')->format('Y-m-d');?>"> Следующий </a>
         <div class="big-calendar-wrap">
             <div class="big-calendar-weekdays">Пн.</div>
             <div class="big-calendar-weekdays">Вт.</div>
@@ -25,9 +23,9 @@
                        <?=$day['dayNum']?>
                     </a>
 
-                    <?php if (!empty($day['title'])) {
-                      foreach ($day['title'] as $title){
-                         echo '<a href="/day/showDayActivity?date='.$day['date'].'"class'.'="big-calendarItem-activities">'.$title.'<br></a>';
+                    <?php if (!empty($day['titleAndId'])) {
+                      foreach ($day['titleAndId'] as $titleAndId){
+                         echo '<a href="/activity/view?id='.$titleAndId[1].'" class="big-calendarItem-activities">'.$titleAndId[0].'<br></a>';
                       }
                     } ?>
                 </div>
@@ -37,14 +35,14 @@
     </div>
 </div>
 
-<h3 class="mt-4 text-primary"> Активности на сегодня </h3>
-<div class="current-activity">
-    <?php foreach ($ActivityCurrentDay as $item) : ?>
-        <div class="col-md-3 day-activity">
-            <a href="/activity/view?id=<?=$item['id']?>"><h4 class="mt-4 text-primary"><?=$item['title']?></a>
-
-            <h6 class="mt-4 text-primary"><?=$item['dateStart']?> </h6>
-        </div>
-    <?php endforeach ?>
-</div>
+<!--<h3 class="mt-4 text-primary"> Активности на сегодня </h3>-->
+<!--<div class="current-activity">-->
+<!--    --><?php //foreach ($ActivityCurrentDay as $item) : ?>
+<!--        <div class="col-md-3 day-activity">-->
+<!--            <a href="/activity/view?id=--><?//=$item['id']?><!--"><h4 class="mt-4 text-primary">--><?//=$item['title']?><!--</a>-->
+<!---->
+<!--            <h6 class="mt-4 text-primary">--><?//=$item['dateStart']?><!-- </h6>-->
+<!--        </div>-->
+<!--    --><?php //endforeach ?>
+<!--</div>-->
 

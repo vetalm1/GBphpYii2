@@ -13,7 +13,7 @@ class DayController extends BaseController
     public function actions() {
         return [
             'showDayActivity'=> ['class'=>ShowDayActivityAction::class, 'dayTitle'=>'Список активностей на сегодня'],
-            'showMonthActivity'=>['class'=>showMonthActivityAction::class, 'monthTitle'=>'Список активностей']
+            'showMonthActivity'=>['class'=>showMonthActivityAction::class, 'monthTitle'=>'Календарь задач на ']
         ];
     }
 

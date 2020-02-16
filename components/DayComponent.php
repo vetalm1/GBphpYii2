@@ -113,7 +113,7 @@ class DayComponent extends Component
         return $monthFullNameMass[$month];
     }
 
-    public function ShowCalendar($month, $year)
+    public function ShowCalendar($month, $year)  // Old, bad practise...
     {
         $yearPreviousMonth = $year;
         $month - 1 == 0 ? $yearPreviousMonth = $year - 1 : $yearPreviousMonth = $year;
@@ -185,7 +185,7 @@ class DayComponent extends Component
         }
 
         return $calendar;
-    } // Old, bad practise...
+    }
 }
 
 

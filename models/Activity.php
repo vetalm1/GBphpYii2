@@ -15,6 +15,7 @@ class Activity extends ActivityBase //Model
 //    public $description;
 //    public $date;
 //    public $isBlocked;
+//    public $email;
     public  $isRepeat;
     public $priority;
 
@@ -25,7 +26,6 @@ class Activity extends ActivityBase //Model
     const REPEAT_TYPE=[self::DAY=>'Каждый день', self::WEEK=>'Каждую неделю',
                        self::MONTH=>'Каждый месяц'];
     public $repeatEmail;
-//    public $email;
     public $useNotification;
 
     Public $files;

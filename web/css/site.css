@@ -125,7 +125,6 @@ a.desc:after {
     align-items: center;
     margin: 0 auto;
 }
-
 .calendarItem {
     display: flex;
     padding: 5px;
@@ -138,9 +137,6 @@ a.desc:after {
     border: 1px solid lightgrey;
     border-radius: 3px;
 }
-.red {
-    background-color: #fdf3cc /*#FEEFEC;*/
-}
 .calendar-weekdays{
     display: flex;
     padding: 5px;
@@ -150,16 +146,7 @@ a.desc:after {
     align-items: center;
     margin: 5px;
 }
-.another-month{
-    color: lightgrey;
-    background-color: aliceblue;
 
-}
-.bold {
-    color: #337ab7;
-    font-weight: bolder;
-    text-decoration: underline;
-}
 .current-activity {
     display: flex;
     flex-direction: column;
@@ -168,4 +155,59 @@ a.desc:after {
     border: 1px solid lightgrey;
     border-radius: 3px;
     margin: 10px 0px;
+}
+
+.big-calendar-wrap{
+    width: 800px;
+    /*height: 280px;*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+.big-calendar-weekdays{
+    display: flex;
+    padding: 5px;
+    width: 100px;
+    height: 30px;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+}
+.big-calendarItem{
+   /* display: flex;*/
+    padding: 5px;
+    width: 100px;
+    height: 100px;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    background-color: lightcyan;
+    border: 1px solid lightgrey;
+    border-radius: 3px;
+}
+.big-calendarItem a{
+
+    display: block;
+}
+.bold {
+    color: #337ab7;
+    font-size: 16px;
+    font-weight: bolder;
+    text-decoration: none;
+}
+.big-calendarItem + .bold {
+    font-size: 22px;
+}
+.big-calendarItem-activities{
+    font-weight: lighter;
+    font-size: 10px;
+}
+.another-month{
+    color: lightgrey;
+    background-color: aliceblue;
+}
+.red {
+    background-color: #fdf3cc /*#FEEFEC;*/
 }
